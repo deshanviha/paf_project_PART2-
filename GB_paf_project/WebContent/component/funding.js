@@ -1,5 +1,4 @@
 
-alert("Go Head");
 $(document).ready(function() 
 {  
 		$("#alertSuccess").hide();  
@@ -30,7 +29,7 @@ $(document).on("click", "#btnSave", function(event)
 
 	$.ajax( 
 	{  
-			url : "fundingService",  
+			url : "fundAPI",  
 			type : type,  
 			data : $("#formFund").serialize(),  
 			dataType : "text",  
@@ -44,6 +43,7 @@ $(document).on("click", "#btnSave", function(event)
 
 function fundSave(response, status) 
 {  
+
 	if (status == "success")  
 	{   
 		var resultSet = JSON.parse(response); 
@@ -53,7 +53,9 @@ function fundSave(response, status)
 			$("#alertSuccess").text("Successfully saved.");    
 			$("#alertSuccess").show(); 
 
-			$("#divFundGrid").html(resultSet.data);   
+			$("#divFundGrid").html(resultSet.data);
+			
+			   
 		} else if (resultSet.status.trim() == "error")   
 		{    
 			$("#alertError").text(resultSet.data);    
@@ -92,15 +94,17 @@ $(document).on("click", ".btnUpdate", function(event)
 //REMOVE===========================================
 $(document).on("click", ".btnRemove", function(event) 
 {  
+
 	$.ajax(  
 	{   
-		url : "fundingService",   
+		url : "fundAPI",   
 		type : "DELETE",   
 		data : "fundId=" + $(this).data("fundid"),   
 		dataType : "text",   
 		complete : function(response, status)   
 		{    
-			fundDelete(response.responseText, status);   
+			fundDelete(response.responseText, status); 
+			show.status  
 		}  
 	}); 
 }); 
@@ -142,17 +146,17 @@ function validateFundForm()
 { // CODE
 if ($("#funderName").val().trim() == "") 
  { 
- return "Insert Item Code."; 
+ return "Insert Fund Name."; 
  } 
 // NAME
 if ($("#fundDate").val().trim() == "") 
  { 
- return "Insert Item Name."; 
+ return "Insert fund date."; 
  } 9
 // PRICE-------------------------------
 if ($("#fundPrice").val().trim() == "") 
  { 
- return "Insert Item Price."; 
+ return "Insert fund Price."; 
  } 
 
 // is numerical value

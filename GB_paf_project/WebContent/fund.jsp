@@ -33,19 +33,20 @@
 					<input type="hidden" id="hidFundIDSave" name="hidFundIDSave" value=""> 
 				</form>
 				
+			<br>
 				<div id="alertSuccess" class="alert alert-success"> </div>
 				
-			   <div id="alertError" class="alert alert-danger"></div>
+			<br>
 				
+			   <div id="alertError" class="alert alert-danger"></div>		
 			   <br>
+			   
 				<div id="divFundGrid">
 					<%
 						funding getFund = new funding();
 					out.print(getFund.readFund());
 					%>
-				</div>
-				
-				 
+				</div> 
 			</div>
 		</div>
 </div>

@@ -42,7 +42,7 @@ public class funding {
 			preparedStmt.setDouble(4, Double.parseDouble(fun_price));
 			preparedStmt.setString(5, fun_cate);
 			preparedStmt.setString(6, fun_des);
-
+			
 			// execute the statement
 			preparedStmt.execute();
 			con.close();
