@@ -5,6 +5,7 @@ $(document).on("click", "#btnSave", function(event)
  $("#alertSuccess").hide(); 
  $("#alertError").text(""); 
  $("#alertError").hide(); 
+
 // Form validation-------------------
 var status = validateFundForm(); 
 if (status != true) 
@@ -34,6 +35,7 @@ function onFundSaveComplete(response, status)
 if (status == "success") 
  { 
  var resultSet = JSON.parse(response); 
+
  if (resultSet.status.trim() == "success") 
  { 
  $("#alertSuccess").text("Successfully saved."); 
@@ -101,11 +103,10 @@ function fundDelete(response, status)
 		console.log(response);
 		if (resultSet.status.trim() == "success")   
 		{    
-			alert("abcd");
 			$("#alertSuccess").text("Successfully deleted.");    
 			$("#alertSuccess").show(); 
 		
-			$("#hidFundIDSave").html(resultSet.data); 
+			$("#divfundGrid").html(resultSet.data); 
 			
 		} else if (resultSet.status.trim() == "error")   
 		{    

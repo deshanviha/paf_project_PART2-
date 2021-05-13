@@ -42,7 +42,6 @@ public class fundAPI extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		// TODO Auto-generated method stub
 		String output = fundObj.insertFund(request.getParameter("funderName"),      
 				request.getParameter("fundDate"),     
 				request.getParameter("fundPrice"),        

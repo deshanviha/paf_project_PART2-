@@ -7,6 +7,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+
 public class funding {
 
 	private Connection connect() {
@@ -65,7 +68,7 @@ public class funding {
 				return "Error while connecting to the database for reading.";
 			}
 			// Prepare the html table to be displayed
-			output = "<table border=\"1\"><tr><th>Funder Name</th><th>Date</th><th>Price</th><th>Category</th><th>Description</th><th>Update</th><th>Remove</th></tr>";
+			output = "<table border=\'1\'><tr><th>Funder Name</th><th>Date</th><th>Price</th><th>Category</th><th>Description</th><th>Update</th><th>Remove</th></tr>";
 			String query = "select * from fundingtest1";
 			Statement stmt = (Statement) con.createStatement();
 			ResultSet rs = ((java.sql.Statement) stmt).executeQuery(query);
@@ -106,8 +109,8 @@ public class funding {
 		return output;
 	}
 
-	public String updateFund(String fun_Id, String fun_name, String fun_date, String fun_price, String fun_cate,
-			String fun_des) {
+	public String updateFund(String fun_Id, String fun_name, String fun_date, String fun_price, String fun_cate,String fun_des) {
+		
 		String output = "";
 
 		try {
