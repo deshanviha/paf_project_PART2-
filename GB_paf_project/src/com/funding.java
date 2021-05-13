@@ -1,4 +1,4 @@
-package model;
+package com;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -46,8 +46,10 @@ public class funding {
 			// execute the statement
 			preparedStmt.execute();
 			con.close();
+			
 			String newFund = readFund(); 
-			output =  "{\"status\":\"success\", \"data\": \"" + newFund + "\"}";  
+			output =  "{\"status\":\"success\", \"data\": \"" + newFund + "\"}";
+			
 		} catch (Exception e) {
 			output =  "{\"status\":\"error\", \"data\": \"Error while inserting the funds.\"}";  
 			System.err.println(e.getMessage());
@@ -67,6 +69,9 @@ public class funding {
 			String query = "select * from fundingtest1";
 			Statement stmt = (Statement) con.createStatement();
 			ResultSet rs = ((java.sql.Statement) stmt).executeQuery(query);
+			
+			
+			
 			// iterate through the rows in the result set
 			while (rs.next()) {
 				String fundId = Integer.toString(rs.getInt("fundId"));
@@ -75,6 +80,8 @@ public class funding {
 				String fundPrice = Double.toString(rs.getDouble("fundPrice"));
 				String fundCate = rs.getString("fundCate");
 				String fundDesc = rs.getString("fundDesc");
+				
+				
 
 				output += "<tr><td><input id=\'hidFundIDUpdate\' name=\'hidFundIDUpdate\' type=\'hidden\' value=\'" + fundId + "'>" 
 						+ funderName + "</td>"; 
@@ -82,6 +89,8 @@ public class funding {
 				output += "<td>" + fundPrice + "</td>";
 				output += "<td>" + fundCate + "</td>";
 				output += "<td>" + fundDesc + "</td>";
+				
+				
 
 				output +="<td><input name='btnUpdate' type='button' value='Update' class='btnUpdate btn btn-secondary'></td>"       
 						+ "<td><input name='btnRemove' type='button' value='Remove' class='btnRemove btn btn-danger' data-fundid='" + fundId + "'>" + "</td></tr>"; 
@@ -125,8 +134,10 @@ public class funding {
 			// execute the statement
 			preparedStmt.execute();
 			con.close();
+			
 			String newFund = readFund(); 
 			output =  "{\"status\":\"success\", \"data\": \"" + newFund + "\"}";  
+			
 		} catch (Exception e) {
 			output =  "{\"status\":\"error\", \"data\": \"Error while updating the funds.\"}";  
 			System.err.println(e.getMessage());
@@ -160,7 +171,7 @@ public class funding {
 			String newFund = readFund(); 
 			output =  "{\"status\":\"success\", \"data\": \"" + newFund + "\"}"; 
 		} catch (Exception e) {
-			output =  "{\"status\":\"error\", \"data\": \"Error while updating the funds.\"}";  
+			output = "Error while deleting the fund.";   
 			System.err.println(e.getMessage());
 		}
 

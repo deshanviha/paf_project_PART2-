@@ -1,80 +1,63 @@
-
-$(document).ready(function() 
-{  
-		$("#alertSuccess").hide();  
-	    $("#alertError").hide(); 
-}); 
- 
- 
-// SAVE ============================================ 
-$(document).on("click", "#btnSave", function(event) 
-{  
-	// Clear alerts---------------------  
-	$("#alertSuccess").text("");  
-	$("#alertSuccess").hide();  
-	$("#alertError").text("");  
-	$("#alertError").hide(); 
- 
-	// Form validation-------------------  
-	var status = validateFundForm();  
-	if (status != true)  
-	{   
-		$("#alertError").text(status);   
-		$("#alertError").show();   
-		return;  
-	} 
- 
-	// If valid------------------------  
-	var type = ($("#hidFundIDSave").val() == "") ? "POST" : "PUT"; 
-
-	$.ajax( 
-	{  
-			url : "fundAPI",  
-			type : type,  
-			data : $("#formFund").serialize(),  
-			dataType : "text",  
-			complete : function(response, status)  
-			{   
-				fundSave(response.responseText, status);  
-			} 
-	}); 
-}); 
+$(document).on("click", "#btnSave", function(event)
+{ 
+// Clear alerts---------------------
+ $("#alertSuccess").text(""); 
+ $("#alertSuccess").hide(); 
+ $("#alertError").text(""); 
+ $("#alertError").hide(); 
+// Form validation-------------------
+var status = validateFundForm(); 
+if (status != true) 
+ { 
+ $("#alertError").text(status); 
+ $("#alertError").show(); 
+ return; 
+ } 
+// If valid------------------------
+var type = ($("#hidFundIDSave").val() == "") ? "POST" : "PUT"; 
+ $.ajax( 
+ { 
+ url : "fundAPI", 
+ type : type, 
+ data : $("#formFund").serialize(), 
+ dataType : "text", 
+ complete : function(response, status) 
+ { 
+ onFundSaveComplete(response.responseText, status); 
+ } 
+ }); 
+});
 
 
-function fundSave(response, status) 
-{  
+function onFundSaveComplete(response, status)
+{ 
+if (status == "success") 
+ { 
+ var resultSet = JSON.parse(response); 
+ if (resultSet.status.trim() == "success") 
+ { 
+ $("#alertSuccess").text("Successfully saved."); 
+ $("#alertSuccess").show(); 
+ $("#divfundGrid").html(resultSet.data); 
+ } else if (resultSet.status.trim() == "error") 
+ { 
+ $("#alertError").text(resultSet.data); 
+ $("#alertError").show(); 
+ } 
+ } else if (status == "error") 
+ { 
+ $("#alertError").text("Error while saving."); 
+ $("#alertError").show(); 
+ } else
+ { 
+ $("#alertError").text("Unknown error while saving.."); 
+ $("#alertError").show(); 
+ }
 
-	if (status == "success")  
-	{   
-		var resultSet = JSON.parse(response); 
+ $("#hidFundIDSave").val(""); 
+ $("#formFund")[0].reset(); 
+}
 
-		if (resultSet.status.trim() == "success")   
-		{    
-			$("#alertSuccess").text("Successfully saved.");    
-			$("#alertSuccess").show(); 
-
-			$("#divFundGrid").html(resultSet.data);
-			
-			   
-		} else if (resultSet.status.trim() == "error")   
-		{    
-			$("#alertError").text(resultSet.data);    
-			$("#alertError").show();   
-		} 
-
-	} else if (status == "error")  
-	{   
-		$("#alertError").text("Error while saving.");   
-		$("#alertError").show();  
-	} else  
-	{   
-		$("#alertError").text("Unknown error while saving..");   
-		$("#alertError").show();  
-	} 
-
-	$("#hidFundIDSave").val("");  
-	$("#formFund")[0].reset(); 
-} 
 
  
 // UPDATE========================================== 
@@ -112,16 +95,17 @@ $(document).on("click", ".btnRemove", function(event)
 function fundDelete(response, status) 
 {  
 	if (status == "success")  
-	{   
-		var resultSet = JSON.parse(response); 
-
+	{  
+	console.log(response);
+		var resultSet = JSON.parse(response);
+		console.log(response);
 		if (resultSet.status.trim() == "success")   
 		{    
-			
+			alert("abcd");
 			$("#alertSuccess").text("Successfully deleted.");    
 			$("#alertSuccess").show(); 
 		
-			$("#divFundGrid").html(resultSet.data); 
+			$("#hidFundIDSave").html(resultSet.data); 
 			
 		} else if (resultSet.status.trim() == "error")   
 		{    
@@ -143,10 +127,11 @@ function fundDelete(response, status)
  
 // CLIENT-MODEL========================================================================= 
 function validateFundForm() 
-{ // CODE
+
+{ 
 if ($("#funderName").val().trim() == "") 
  { 
- return "Insert Fund Name."; 
+	 return "Insert Fund Name."; 
  } 
 // NAME
 if ($("#fundDate").val().trim() == "") 
