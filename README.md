@@ -14,4 +14,5 @@ Funding management service is an essential service in GadgetBadget system which 
 <img src="https://www.logo.wine/a/logo/Java_(programming_language)/Java_(programming_language)-Logo.wine.svg" alt="javascript" width="70" height="70"/> <img src="https://cdn.worldvectorlogo.com/logos/eclipse-11.svg" alt="javascript" width="70" height="70"/><img src="https://seeklogo.com/images/M/mysql-logo-69B39F7D18-seeklogo.com.png" alt="javascript" width="70" height="70"/>
 
 StudentID:IT19106670
-Name Hangawaththa N.H.A.V.D
+
+Name: Hangawaththa N.H.A.V.D
