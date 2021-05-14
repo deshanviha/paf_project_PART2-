@@ -174,7 +174,7 @@ public class funding {
 			String newFund = readFund(); 
 			output =  "{\"status\":\"success\", \"data\": \"" + newFund + "\"}"; 
 		} catch (Exception e) {
-			output = "Error while deleting the fund.";   
+			output = "{\"status\":\"error\", \"data\": \"Error while deleting the funds.\"}";  
 			System.err.println(e.getMessage());
 		}
 
